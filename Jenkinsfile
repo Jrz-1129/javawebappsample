@@ -26,6 +26,16 @@ node {
        sh '''
           az login --service-principal -u $AZURE_CLIENT_ID -p $AZURE_CLIENT_SECRET -t $AZURE_TENANT_ID
           az account set -s $AZURE_SUBSCRIPTION_ID
+
+          az webapp deploy \
+            --resource-group jenkins-get-started-rg2 \
+            --name rjin1129-jenkins-java-app \
+            --src-path target/calculator-1.0.war \
+            --type war \
+            --clean true \
+            --restart true
+
+          az logout
         '''
       }
       // get publish settings
